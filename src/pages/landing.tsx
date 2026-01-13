@@ -1,14 +1,24 @@
 import { useState, useMemo } from "react"
 import { Navigation } from "../components/header/nav"
 import { Footer } from "../components/footer/foot"
-// import { ReviewCard } from "@/components/review-card"
+import { ReviewCard } from "../components/review/reviewcard"
+import { mockReviews } from "../components/mockdata/review"
 import { LuSearch } from "react-icons/lu";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
-  
+  const filteredReviews = useMemo(() => {
+    return mockReviews.filter((review) => {
+      const matchesSearch =
+        review.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        review.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+      const matchesCategory =
+        !selectedCategory || selectedCategory === "All Categories" || review.category === selectedCategory.toLowerCase()
+      return matchesSearch && matchesCategory
+    })
+  }, [searchQuery, selectedCategory])
 
   return (
     <div className="min-h-screen flex flex-col bg-black text-white selection:bg-white selection:text-black">
@@ -43,7 +53,7 @@ export default function Home() {
           {/* Main Content Area */}
           <div className="flex-1 space-y-12">
             <header className="space-y-6">
-              <h1 className="text-4xl lg:text-6xl font-serif tracking-tight font-light leading-tight">
+              <h1 className="text-4xl lg:text-6xl font-serif italic tracking-tight font-light leading-tight">
                 Reviewing the <br />
                 <span className="text-white/40">culture around us.</span>
               </h1>
@@ -62,8 +72,14 @@ export default function Home() {
                 />
               </div>
             </header>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+              {(filteredReviews.length > 0 ? filteredReviews : mockReviews).map((review) => (
+                <ReviewCard key={review.id} review={review} />
+              ))}
             </div>
           </div>
+        </div>
       </main>
 
       <Footer />
