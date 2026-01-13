@@ -1,0 +1,72 @@
+import { useState, useMemo } from "react"
+import { Navigation } from "../components/header/nav"
+import { Footer } from "../components/footer/foot"
+// import { ReviewCard } from "@/components/review-card"
+import { LuSearch } from "react-icons/lu";
+
+export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+
+  
+
+  return (
+    <div className="min-h-screen flex flex-col bg-black text-white selection:bg-white selection:text-black">
+      <Navigation />
+
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
+        <div className="flex flex-col lg:flex-row gap-16">
+          {/* Sidebar / Directory Navigation */}
+          <aside className="w-full lg:w-64 space-y-8">
+            <div>
+              <h2 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/30 mb-8 italic">
+                Marketplace
+              </h2>
+              <nav className="flex flex-col gap-1">
+                {["All Categories", "Restaurants", "Books", "Shows"].map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`text-left px-4 py-2.5 rounded-lg text-sm transition-all ${
+                      selectedCategory === cat
+                        ? "bg-white/10 text-white font-medium italic"
+                        : "text-white/50 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          {/* Main Content Area */}
+          <div className="flex-1 space-y-12">
+            <header className="space-y-6">
+              <h1 className="text-4xl lg:text-6xl font-serif tracking-tight font-light leading-tight">
+                Reviewing the <br />
+                <span className="text-white/40">culture around us.</span>
+              </h1>
+
+              <div className="relative group max-w-xl">
+                <LuSearch
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors"
+                  size={18}
+                />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search reviews, authors, places..."
+                  className="w-full bg-[#0a0a0a] border border-white/5 rounded-xl pl-12 pr-4 py-4 text-sm focus:outline-none focus:border-white/20 transition-all placeholder:text-white/20"
+                />
+              </div>
+            </header>
+            </div>
+          </div>
+      </main>
+
+      <Footer />
+    </div>
+  )
+}
