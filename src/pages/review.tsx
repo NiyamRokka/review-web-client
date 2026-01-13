@@ -1,7 +1,7 @@
 import { Navigation } from "../components/header/nav"
 import { Footer } from "../components/footer/foot"
-import { ReviewCard } from "@/components/review-card"
-// import { mockReviews } from "@/lib/mock-data"
+import { ReviewCard } from "../components/review/reviewcard"
+import { mockReviews } from "../components/mockdata/review"
 import { FaHeart } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
@@ -26,7 +26,7 @@ export default function ReviewDetailPage({ params }: ReviewDetailPageProps) {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="font-serif text-3xl font-bold text-foreground mb-4">Review Not Found</h1>
-            <Link href="/" className="text-primary hover:underline">
+            <Link to="/" className="text-primary hover:underline">
               Return to Home
             </Link>
           </div>
@@ -57,7 +57,7 @@ export default function ReviewDetailPage({ params }: ReviewDetailPageProps) {
         {/* Back Button */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <Link
-            href="/categories"
+            to="/categories"
             className="inline-flex items-center gap-2 text-primary hover:text-accent transition-colors mb-8"
           >
             <FaArrowLeft size={20} />
