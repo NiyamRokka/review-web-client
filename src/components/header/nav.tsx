@@ -13,7 +13,7 @@ export function Navigation() {
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to={'/'} className="flex items-center space-x-2">
           <LuBookOpen className="h-6 w-6" />
-          <span className="text-xl font-serif italic tracking-tight">Tasted & Tales</span>
+          <span className="text-2xl font-serif italic tracking-tight">Tasted & Tales</span>
         </Link>
 
         <div className="hidden md:flex md:items-center md:space-x-8">
