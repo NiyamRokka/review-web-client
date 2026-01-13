@@ -53,7 +53,7 @@ export default function Home() {
           {/* Main Content Area */}
           <div className="flex-1 space-y-12">
             <header className="space-y-6">
-              <h1 className="text-4xl lg:text-6xl font-serif italic tracking-tight font-light leading-tight">
+              <h1 className="text-4xl lg:text-6xl font-serif tracking-tight font-light leading-tight">
                 Reviewing the <br />
                 <span className="text-white/40">culture around us.</span>
               </h1>
