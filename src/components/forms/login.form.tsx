@@ -38,21 +38,25 @@ const LoginForm = () => {
     mutationFn:login,
     mutationKey:['login'],
     onSuccess: (response) => {
-      toast.success(response.message ?? 'Login Success')
+      const message = response?.data?.message ?? 'Login Success'
+      toast.success(message)
       
-      setUser(response?.data?.data)
-      if (response?.data?.data?.role === Role.USER) {
-        navigate(from || '/')
-      } else {
-        navigate('/admin')
-      }
+      const user = response?.data?.data
+  setUser(user)
 
-    },
-    onError:(error) =>{
-      console.log('on login failed')
-      console.log(error)
+  if (user?.role === Role.USER) {
+    navigate(from || '/')
+  } else {
+    navigate('/admin')
+  }
+ },
+    onError: (error: any) => {
+    const message =
+      error?.response?.data?.message ||
+      error?.message ||
+      'Login Failed'
 
-      toast.error(error.message ?? 'Login Failed')
+    toast.error(message)
 
     }
 
