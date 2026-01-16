@@ -7,15 +7,11 @@ import { FaArrowLeft } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { Link } from "react-router"
 import { useState } from "react"
+import{ useParams } from "react-router-dom";
 
-interface ReviewDetailPageProps {
-  params: {
-    id: string
-  }
-}
-
-export default function ReviewDetailPage({ params }: ReviewDetailPageProps) {
-  const review = mockReviews.find((r) => r.id === params.id)
+export default function ReviewDetailPage() {
+   const { id } = useParams<{ id: string }>();
+  const review = mockReviews.find((r) => r.id === id);
   const [isLiked, setIsLiked] = useState(false)
   const [likes, setLikes] = useState(Math.floor(Math.random() * 500) + 50)
 
@@ -160,33 +156,6 @@ export default function ReviewDetailPage({ params }: ReviewDetailPageProps) {
                 <button className="mt-4 px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity">
                   Post Comment
                 </button>
-              </div>
-
-              {/* Sample Comments */}
-              <div className="space-y-4">
-                {[1, 2].map((i) => (
-                  <div key={i} className="bg-card border border-border rounded-xl p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <p className="font-semibold text-foreground">User {i}</p>
-                        <p className="text-sm text-muted-foreground">2 days ago</p>
-                      </div>
-                      <div className="flex gap-1">
-                        {Array.from({ length: 5 }).map((_, j) => (
-                          <CiStar
-                            key={j}
-                            size={16}
-                            className={j < 4 ? "fill-primary text-primary" : "text-muted-foreground"}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <p className="text-foreground">
-                      Great review! I completely agree with your thoughts. This really helped me decide whether to check
-                      it out.
-                    </p>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
